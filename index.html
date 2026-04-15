@@ -1,0 +1,2166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>x402view</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <style>
+    :root {
+      /* Mostly Monochrome Palette */
+      --bg: #fafafa;
+      --surface: #ffffff;
+      --ink: #1a1a1a;
+      --ink-secondary: #444;
+      --ink-muted: #888;
+      --border: #e5e5e5;
+      --border-strong: #d0d0d0;
+
+      /* Accent - Amber (used sparingly for hot indicators only) */
+      --accent: #b45309;
+      --accent-bg: rgba(180, 83, 9, 0.06);
+
+      /* Links */
+      --link: #0369a1;
+      --link-hover: #0284c7;
+
+      /* Semantic */
+      --green: #059669;
+      --green-bg: rgba(5, 150, 105, 0.08);
+      --red: #dc2626;
+      --red-bg: rgba(220, 38, 38, 0.08);
+
+      /* Fonts */
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Roboto Mono', monospace;
+    }
+
+    /* Dark mode */
+    [data-theme="dark"] {
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --ink: #f5f5f5;
+      --ink-secondary: #ccc;
+      --ink-muted: #888;
+      --border: #333;
+      --border-strong: #444;
+      --accent-bg: rgba(180, 83, 9, 0.15);
+      --green-bg: rgba(5, 150, 105, 0.15);
+      --red-bg: rgba(220, 38, 38, 0.15);
+
+      /* Brighter links for dark mode */
+      --link: #38bdf8;
+      --link-hover: #7dd3fc;
+    }
+
+    /* Dark mode button fix */
+    [data-theme="dark"] .btn-primary {
+      background: #0ea5e9;
+      border-color: #0ea5e9;
+      color: #0f0f0f;
+    }
+
+    [data-theme="dark"] .btn-primary:hover {
+      background: #38bdf8;
+      border-color: #38bdf8;
+      color: #0f0f0f;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-img {
+      height: 48px;
+      width: auto;
+    }
+
+    /* Brighten logo in dark mode */
+    [data-theme="dark"] .logo-img {
+      filter: brightness(1.3) saturate(1.2);
+    }
+
+    .tagline {
+      font-size: 11px;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .status {
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .status .live {
+      color: var(--green);
+    }
+
+    .btn {
+      padding: 8px 16px;
+      font-size: 12px;
+      font-family: inherit;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.15s;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      border-color: var(--ink);
+      background: var(--bg);
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: white;
+      border-color: var(--ink);
+    }
+
+    .btn-primary:hover {
+      background: var(--ink-secondary);
+      border-color: var(--ink-secondary);
+      color: white;
+    }
+
+    /* Stat cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .stat-change {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    .stat-change.up { color: var(--green); }
+    .stat-change.down { color: var(--red); }
+
+    /* Mini bar chart background */
+    .stat-bars {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      padding: 0 20px;
+      opacity: 0.12;
+    }
+
+    .stat-bars .bar {
+      flex: 1;
+      background: var(--ink);
+    }
+
+    /* Table section */
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--ink-muted);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    .section-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .filter-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-family: inherit;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink-muted);
+      cursor: pointer;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    th.r { text-align: right; }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover {
+      background: var(--bg);
+    }
+
+    .r { text-align: right; }
+
+    /* Token cell */
+    .token-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .token-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--ink-secondary);
+      overflow: hidden;
+    }
+
+    .token-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .token-name {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .token-symbol {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink-muted);
+    }
+
+    .facilitator-icon {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 6px;
+      color: var(--ink-muted);
+    }
+
+    .facilitator-icon:hover {
+      color: var(--ink-secondary);
+    }
+
+    .badge.new {
+      background: var(--green-bg);
+      color: var(--green);
+    }
+
+    /* Numbers - use mono font */
+    .num {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+      font-size: 12px;
+    }
+
+    .price {
+      font-weight: 500;
+    }
+
+    .change {
+      font-weight: 500;
+    }
+
+    .change.up { color: var(--green); }
+    .change.down { color: var(--red); }
+
+    .mcap {
+      color: var(--ink-secondary);
+    }
+
+    .ratio {
+      font-weight: 600;
+    }
+
+    .ratio.hot {
+      color: var(--accent);
+    }
+
+    /* Sparkline */
+    .sparkline {
+      width: 80px;
+      height: 24px;
+    }
+
+    .sparkline svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .sparkline path {
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .sparkline.up path { stroke: var(--green); }
+    .sparkline.down path { stroke: var(--red); }
+    .sparkline.neutral path { stroke: var(--ink-muted); }
+
+    /* Secondary panels */
+    .panels-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .panel-header {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .panel-body {
+      padding: 0;
+    }
+
+    .ranking-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ranking-item:last-child {
+      border-bottom: none;
+    }
+
+    .rank-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .rank-pos {
+      width: 20px;
+      color: var(--ink-muted);
+      font-size: 12px;
+    }
+
+    .rank-ticker {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .rank-value {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .rank-value.up { color: var(--green); }
+    .rank-value.down { color: var(--red); }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      max-width: 480px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--ink-muted);
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      color: var(--ink);
+    }
+
+    .modal-body {
+      padding: 20px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--ink-secondary);
+    }
+
+    .modal-body p {
+      margin: 0 0 12px;
+    }
+
+    .modal-body a {
+      color: var(--link);
+    }
+
+    .modal-footer {
+      padding: 12px 20px;
+      border-top: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--ink-muted);
+      text-align: center;
+    }
+
+    .modal-footer a {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* Footer */
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--ink-muted);
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: var(--link-hover);
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-brand img {
+      height: 16px;
+      opacity: 0.7;
+    }
+
+    /* Info banner */
+    .info-banner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    .info-banner a {
+      color: var(--link);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .info-banner a:hover {
+      text-decoration: underline;
+    }
+
+    /* x402 Momentum indicator */
+    .x402-momentum {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .momentum-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--ink-muted);
+    }
+
+    .momentum-gauge {
+      width: 80px;
+    }
+
+    .gauge-track {
+      position: relative;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: visible;
+    }
+
+    .gauge-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--red) 0%, var(--ink-muted) 50%, var(--green) 100%);
+      width: 100%;
+      opacity: 0.3;
+    }
+
+    .gauge-marker {
+      position: absolute;
+      top: 50%;
+      width: 10px;
+      height: 10px;
+      background: var(--ink);
+      border: 2px solid var(--surface);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      transition: left 0.3s ease;
+    }
+
+    .gauge-marker.hot {
+      background: var(--green);
+    }
+
+    .gauge-marker.cold {
+      background: var(--red);
+    }
+
+    .momentum-sep {
+      color: var(--border);
+      font-size: 12px;
+    }
+
+    .momentum-stat {
+      font-size: 11px;
+      color: var(--ink-muted);
+    }
+
+    .momentum-stat .stat-val {
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+
+    .momentum-stat .stat-val.up {
+      color: var(--green);
+    }
+
+    .momentum-stat .stat-val.down {
+      color: var(--red);
+    }
+
+    /* Expandable rows */
+    tr.expandable {
+      cursor: pointer;
+    }
+
+    tr.expandable:hover td {
+      background: var(--bg);
+    }
+
+    tr.detail-row {
+      display: none;
+    }
+
+    tr.detail-row.open {
+      display: table-row;
+    }
+
+    tr.detail-row td {
+      padding: 0;
+      background: var(--bg);
+    }
+
+    tr.detail-row:hover td {
+      background: var(--bg);
+    }
+
+    .detail-content {
+      padding: 20px 24px;
+      display: flex;
+      gap: 40px;
+    }
+
+    .detail-left {
+      flex: 1;
+    }
+
+    .detail-description {
+      font-size: 13px;
+      color: var(--ink-secondary);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .facilitator-info {
+      margin: 0 24px 20px;
+      padding: 12px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .facilitator-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .facilitator-endpoint {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--ink-secondary);
+    }
+
+    .facilitator-networks {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .network-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--ink-secondary);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .network-badge svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .facilitator-stats {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink-secondary);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: border-color 0.15s;
+    }
+
+    .facilitator-stats:hover {
+      border-color: var(--ink-muted);
+    }
+
+    .facilitator-stats img {
+      width: 18px;
+      height: 18px;
+    }
+
+    .detail-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .detail-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: var(--ink-secondary);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+
+    .detail-link:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    .detail-link svg {
+      width: 14px;
+      height: 14px;
+      opacity: 0.7;
+    }
+
+    .detail-right {
+      display: flex;
+      gap: 16px;
+    }
+
+    .market-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--ink-secondary);
+      font-size: 11px;
+      transition: all 0.15s;
+    }
+
+    .market-link:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    .market-link img {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 6px;
+      opacity: 0.7;
+    }
+
+    .market-link span {
+      font-weight: 500;
+    }
+
+    /* Trade button - matches market-link style */
+    .trade-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--ink-secondary);
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .trade-btn:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    .trade-btn svg {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 6px;
+    }
+
+    /* Theme toggle */
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      padding: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink-muted);
+      transition: all 0.15s;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    .theme-toggle svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Search input */
+    .search-input {
+      padding: 8px 12px;
+      font-size: 12px;
+      font-family: inherit;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink);
+      min-width: 200px;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--ink-muted);
+    }
+
+    .search-input::placeholder {
+      color: var(--ink-muted);
+    }
+
+    /* Sortable headers */
+    th.sortable {
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.15s;
+    }
+
+    th.sortable:hover {
+      color: var(--ink);
+    }
+
+    th.sortable .sort-icon {
+      display: inline-block;
+      margin-left: 4px;
+      opacity: 0.4;
+    }
+
+    th.sortable.asc .sort-icon,
+    th.sortable.desc .sort-icon {
+      opacity: 1;
+    }
+
+    th.sortable.asc .sort-icon {
+      transform: rotate(180deg);
+    }
+
+    /* Tags filter */
+    .tag-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-family: inherit;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink-muted);
+      cursor: pointer;
+      text-transform: capitalize;
+    }
+
+    .tag-btn:hover,
+    .tag-btn.active {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    .filters-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 4px;
+    }
+
+    .filter-separator {
+      width: 1px;
+      height: 24px;
+      background: var(--border);
+      margin: 0 8px;
+    }
+
+    /* Endpoint status indicator */
+    .endpoint-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 12px;
+      font-size: 11px;
+    }
+
+    .endpoint-status.online {
+      color: var(--green);
+    }
+
+    .endpoint-status.offline {
+      color: var(--red);
+    }
+
+    .endpoint-status.checking {
+      color: var(--ink-muted);
+    }
+
+    .endpoint-status svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .status-spinner {
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ========================================
+       RESPONSIVE STYLES
+       ======================================== */
+
+    /* Tablet breakpoint */
+    @media (max-width: 900px) {
+      .container {
+        padding: 16px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .panels-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-content {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .detail-right {
+        justify-content: flex-start;
+      }
+    }
+
+    /* Mobile breakpoint */
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .header-right {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .section-actions {
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .search-input {
+        width: 100%;
+        min-width: unset;
+      }
+
+      .filters-row {
+        width: 100%;
+      }
+
+      .filter-separator {
+        display: none;
+      }
+
+      .filter-group {
+        flex-wrap: wrap;
+      }
+
+      /* Table horizontal scroll */
+      .section {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      table {
+        min-width: 700px;
+      }
+
+      /* Info banner */
+      .info-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .x402-momentum {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .momentum-sep {
+        display: none;
+      }
+
+      /* Footer */
+      .footer {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+
+      .footer span {
+        text-align: center;
+      }
+
+      /* Facilitator info */
+      .facilitator-info {
+        margin: 0 16px 16px;
+      }
+
+      .facilitator-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .facilitator-endpoint {
+        word-break: break-all;
+      }
+    }
+
+    /* Small mobile breakpoint */
+    @media (max-width: 480px) {
+      .container {
+        padding: 12px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-card {
+        padding: 16px;
+      }
+
+      .stat-value {
+        font-size: 22px;
+      }
+
+      .header-right {
+        justify-content: space-between;
+      }
+
+      .btn {
+        padding: 6px 12px;
+        font-size: 11px;
+      }
+
+      .logo-img {
+        height: 36px;
+      }
+
+      .tagline {
+        font-size: 10px;
+      }
+
+      th, td {
+        padding: 10px 8px;
+      }
+
+      .token-icon {
+        width: 28px;
+        height: 28px;
+      }
+
+      .token-cell {
+        gap: 8px;
+      }
+
+      .detail-links {
+        gap: 6px;
+      }
+
+      .detail-link {
+        padding: 5px 10px;
+        font-size: 11px;
+      }
+
+      .market-link {
+        padding: 10px 14px;
+      }
+
+      .panel-header {
+        padding: 12px 14px;
+        font-size: 12px;
+      }
+
+      .ranking-item {
+        padding: 10px 14px;
+      }
+
+      /* Modal */
+      .modal-content {
+        width: 95%;
+        margin: 10px;
+      }
+
+      .modal-body {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-area">
+      <img src="assets/logo.png" alt="x402view" class="logo-img">
+    </div>
+    <div class="header-right">
+      <span class="status"><span class="live">●</span> Live · updated 2m ago</span>
+      <a href="https://x.com/x402view" target="_blank" class="theme-toggle" title="Follow @x402view">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+      </button>
+      <button class="btn" onclick="openAboutModal()">About</button>
+      <a href="https://github.com/primer-systems/x402view" target="_blank" class="btn btn-primary">Submit Project</a>
+    </div>
+  </header>
+
+  <!-- About Modal -->
+  <div id="aboutModal" class="modal" onclick="if(event.target===this)closeAboutModal()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="modal-title">About x402view</span>
+        <button class="modal-close" onclick="closeAboutModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>x402view</strong> is an investment-focused information source for the x402 ecosystem.</p>
+        <p>The <a href="https://www.x402.org" target="_blank">x402 protocol</a> enables programmatic, gasless payments of any size, including micropayments - turning every API into a monetizable endpoint. As the ecosystem grows, x402view tracks the projects and tokens building in this dynamic new sector.</p>
+        <p>We focus on <strong>investable projects</strong>: tokens with real utility, facilitators processing payments, and infrastructure powering agentic commerce.</p>
+        <p style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
+          <strong>Explore more:</strong><br>
+          <a href="https://www.x402.org/ecosystem" target="_blank">x402.org/ecosystem</a> · Full project directory<br>
+          <a href="https://x402scan.com" target="_blank">x402scan.com</a> · Transaction explorer
+        </p>
+        <p style="margin-top: 16px;">
+          <strong>Building with x402?</strong><br>
+          <a href="https://github.com/primer-systems/x402view" target="_blank">Submit your project</a> to be listed.
+        </p>
+      </div>
+      <div class="modal-footer">
+        Built by <a href="https://primer.systems" target="_blank">Primer Systems</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info banner -->
+  <div class="info-banner">
+    <span>The x402 ecosystem at a glance.</span>
+    <div class="x402-momentum" id="x402Momentum">
+      <span class="momentum-label">x402 MOMENTUM</span>
+      <div class="momentum-gauge">
+        <div class="gauge-track">
+          <div class="gauge-fill" id="gaugeFill"></div>
+          <div class="gauge-marker" id="gaugeMarker"></div>
+        </div>
+      </div>
+      <span class="momentum-sep">|</span>
+      <span class="momentum-stat">vs BTC <span id="vsBtcValue" class="stat-val">--</span></span>
+      <span class="momentum-sep">|</span>
+      <span class="momentum-stat"><span id="beatingBtc">-/-</span> beating BTC</span>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">Total Market Cap</div>
+      <div class="stat-value" id="stat-mcap">--</div>
+      <div class="stat-change" id="stat-mcap-change"></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">24h Volume</div>
+      <div class="stat-value" id="stat-volume">--</div>
+      <div class="stat-change" id="stat-volume-change"></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Projects Listed</div>
+      <div class="stat-value" id="stat-projects">--</div>
+      <div class="stat-change" id="stat-tokens" style="color: var(--ink-muted);"></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Active Facilitators</div>
+      <div class="stat-value" id="stat-facilitators">--</div>
+      <div class="stat-change"><a href="https://x402scan.com" style="color: var(--link); text-decoration: none; font-size: 11px;">via x402scan →</a></div>
+    </div>
+  </div>
+
+  <!-- Token Rankings -->
+  <div class="section">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Token Rankings</div>
+        <div class="section-subtitle">x402 ecosystem tokens by market cap</div>
+      </div>
+      <div class="section-actions">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search tokens..." oninput="applyFilters()">
+        <div class="filter-separator"></div>
+        <div class="filters-row">
+          <div class="filter-group">
+            <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">All</button>
+            <button class="filter-btn" data-filter="facilitators" onclick="setFilter('facilitators', this)"><svg viewBox="0 0 16 16" width="14" height="14" style="margin-right: 4px;"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 8h6M8.5 5.5L11 8l-2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Facilitators</button>
+            <button class="filter-btn" data-filter="hot" onclick="setFilter('hot', this)">Hot</button>
+          </div>
+          <div class="filter-separator"></div>
+          <div class="filter-group" id="tagsFilter"></div>
+        </div>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 40px">#</th>
+          <th>Token</th>
+          <th class="r sortable" data-sort="price" onclick="sortTable('price', this)">Price <span class="sort-icon">▼</span></th>
+          <th class="r sortable" data-sort="change24h" onclick="sortTable('change24h', this)">24h <span class="sort-icon">▼</span></th>
+          <th class="r sortable" data-sort="change7d" onclick="sortTable('change7d', this)">7d <span class="sort-icon">▼</span></th>
+          <th class="r sortable desc" data-sort="mcap" onclick="sortTable('mcap', this)">Market Cap <span class="sort-icon">▼</span></th>
+          <th class="r sortable" data-sort="volMcap" onclick="sortTable('volMcap', this)">Vol/MCap <span class="sort-icon">▼</span></th>
+          <th class="r" style="width: 100px">7d Chart</th>
+        </tr>
+      </thead>
+      <tbody id="token-table-body">
+        <tr><td colspan="8" style="text-align: center; padding: 40px; color: var(--ink-muted);">Loading...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Secondary panels -->
+  <div class="panels-grid">
+    <div class="panel">
+      <div class="panel-header">Top Gainers 24h</div>
+      <div class="panel-body" id="top-gainers"></div>
+    </div>
+    <div class="panel">
+      <div class="panel-header">Top Losers 24h</div>
+      <div class="panel-body" id="top-losers"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span>Data: <a href="https://coingecko.com">CoinGecko</a> · Facilitators: <a href="https://x402scan.com">x402scan.com</a> · <a href="https://github.com/primer-systems/x402view">Submit project via GitHub</a></span>
+    <div class="footer-brand">
+      <span>Built by</span>
+      <a href="https://primer.systems" style="font-weight: 500;">Primer Systems</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+// x402view - Token data loader (prices pre-fetched by GitHub Action)
+
+// Format currency
+function formatUSD(value) {
+  if (value >= 1e9) return '$' + (value / 1e9).toFixed(2) + 'B';
+  if (value >= 1e6) return '$' + (value / 1e6).toFixed(2) + 'M';
+  if (value >= 1e3) return '$' + (value / 1e3).toFixed(1) + 'K';
+  if (value >= 1) return '$' + value.toFixed(2);
+  if (value >= 0.01) return '$' + value.toFixed(4);
+  return '$' + value.toFixed(6);
+}
+
+// Format percent change
+function formatChange(value) {
+  if (value === null || value === undefined) return '--';
+  const sign = value >= 0 ? '+' : '';
+  return sign + value.toFixed(1) + '%';
+}
+
+// Get initials from token symbol
+function getInitials(symbol) {
+  return symbol.slice(0, 2).toUpperCase();
+}
+
+// Load projects data
+async function loadProjects() {
+  const response = await fetch('data/projects.json');
+  const data = await response.json();
+  return data.projects;
+}
+
+// Load pre-fetched price data (updated by GitHub Action)
+async function loadPriceData() {
+  try {
+    const response = await fetch('data/prices.json');
+    const data = await response.json();
+    console.log(`Price data from: ${data.updated}`);
+    return data;
+  } catch (err) {
+    console.error('Failed to load price data:', err);
+    return { prices: {}, sparklines: {}, updated: null };
+  }
+}
+
+// Generate SVG path from price data
+function generateSparklinePath(prices, width = 80, height = 24) {
+  if (!prices || prices.length < 2) return 'M0,12 L80,12';
+
+  // Sample ~20 points for smooth line
+  const step = Math.max(1, Math.floor(prices.length / 20));
+  const sampled = prices.filter((_, i) => i % step === 0);
+
+  const values = sampled.map(p => p[1]);
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const range = max - min || 1;
+
+  const points = sampled.map((p, i) => {
+    const x = (i / (sampled.length - 1)) * width;
+    const y = height - ((p[1] - min) / range) * (height - 4) - 2;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  });
+
+  return 'M' + points.join(' L');
+}
+
+// Calculate 7d change from sparkline data
+function calc7dChange(prices) {
+  if (!prices || prices.length < 2) return null;
+  const first = prices[0][1];
+  const last = prices[prices.length - 1][1];
+  return ((last - first) / first) * 100;
+}
+
+// Build social/link buttons
+function buildLinks(project) {
+  const links = [];
+
+  if (project.website) {
+    // Extract domain from URL for display
+    let displayUrl = project.website;
+    try {
+      const url = new URL(project.website);
+      displayUrl = url.hostname.replace(/^www\./, '');
+    } catch (e) {}
+    links.push(`<a href="${project.website}" target="_blank" class="detail-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      ${displayUrl}</a>`);
+  }
+  if (project.docs) {
+    links.push(`<a href="${project.docs}" target="_blank" class="detail-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Docs</a>`);
+  }
+  if (project.twitter) {
+    links.push(`<a href="https://x.com/${project.twitter}" target="_blank" class="detail-link">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      @${project.twitter}</a>`);
+  }
+  if (project.telegram) {
+    const tgUrl = project.telegram.startsWith('http') ? project.telegram : `https://t.me/${project.telegram}`;
+    links.push(`<a href="${tgUrl}" target="_blank" class="detail-link" title="Telegram">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>`);
+  }
+  if (project.discord) {
+    const discordUrl = project.discord.startsWith('http') ? project.discord : `https://discord.gg/${project.discord}`;
+    links.push(`<a href="${discordUrl}" target="_blank" class="detail-link" title="Discord">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></a>`);
+  }
+  if (project.farcaster) {
+    links.push(`<a href="https://warpcast.com/${project.farcaster}" target="_blank" class="detail-link" title="Farcaster">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.24 3.12H5.76a2.64 2.64 0 0 0-2.64 2.64v12.48a2.64 2.64 0 0 0 2.64 2.64h12.48a2.64 2.64 0 0 0 2.64-2.64V5.76a2.64 2.64 0 0 0-2.64-2.64zm-1.44 12.96h-2.4v-4.8h-4.8v4.8H7.2V7.92h2.4v4.8h4.8v-4.8h2.4z"/></svg></a>`);
+  }
+  if (project.youtube) {
+    const ytUrl = project.youtube.startsWith('http') ? project.youtube : `https://youtube.com/${project.youtube}`;
+    links.push(`<a href="${ytUrl}" target="_blank" class="detail-link" title="YouTube">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>`);
+  }
+  if (project.reddit) {
+    const redditUrl = project.reddit.startsWith('http') ? project.reddit : `https://reddit.com/r/${project.reddit}`;
+    links.push(`<a href="${redditUrl}" target="_blank" class="detail-link" title="Reddit">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg></a>`);
+  }
+  if (project.medium) {
+    const mediumUrl = project.medium.startsWith('http') ? project.medium : `https://medium.com/@${project.medium}`;
+    links.push(`<a href="${mediumUrl}" target="_blank" class="detail-link" title="Medium">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg></a>`);
+  }
+  if (project.github) {
+    const ghUrl = project.github.includes('/') ? `https://github.com/${project.github}` : `https://github.com/${project.github}`;
+    links.push(`<a href="${ghUrl}" target="_blank" class="detail-link" title="GitHub">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>`);
+  }
+
+  return links.join('');
+}
+
+// Chain IDs for 1inch swap URLs
+const CHAIN_IDS = {
+  base: 8453,
+  ethereum: 1,
+  polygon: 137,
+  arbitrum: 42161,
+  optimism: 10,
+  bnb: 56
+};
+
+// Network icons (inline SVG) - from Primer Pay extension
+const NETWORK_ICONS = {
+  base: {
+    name: 'Base',
+    svg: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#0052FF"/><path d="M12 6C8.7 6 6 8.7 6 12s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm0 9.5c-1.9 0-3.5-1.6-3.5-3.5S10.1 8.5 12 8.5s3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z" fill="#fff"/></svg>`
+  },
+  ethereum: {
+    name: 'Ethereum',
+    svg: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#627EEA"/><path d="M12 4L7 12l5 3 5-3-5-8z" fill="#fff" opacity="0.6"/><path d="M12 16l-5-3 5 7 5-7-5 3z" fill="#fff"/></svg>`
+  },
+  solana: {
+    name: 'Solana',
+    svg: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#000"/><path d="M7 15.5h8.5l1.5-1.5H8.5L7 15.5z" fill="url(#sol1)"/><path d="M7 10h8.5L17 8.5H8.5L7 10z" fill="url(#sol2)"/><path d="M17 12.75H8.5L7 14.25h8.5l1.5-1.5z" fill="url(#sol3)"/><defs><linearGradient id="sol1" x1="7" y1="14.75" x2="17" y2="14.75"><stop stop-color="#00FFA3"/><stop offset="1" stop-color="#DC1FFF"/></linearGradient><linearGradient id="sol2" x1="7" y1="9.25" x2="17" y2="9.25"><stop stop-color="#00FFA3"/><stop offset="1" stop-color="#DC1FFF"/></linearGradient><linearGradient id="sol3" x1="7" y1="13.5" x2="17" y2="13.5"><stop stop-color="#00FFA3"/><stop offset="1" stop-color="#DC1FFF"/></linearGradient></defs></svg>`
+  },
+  bnb: {
+    name: 'BNB Chain',
+    svg: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#F3BA2F"/><path fill="#fff" d="M12 7l-3 3 1 1 2-2 2 2 1-1-3-3zm-5 5l-1 1 1 1 1-1-1-1zm10 0l-1 1 1 1 1-1-1-1zm-5 2l-2 2-1-1 3 3 3-3-1 1-2-2z"/></svg>`
+  },
+  skale: {
+    name: 'SKALE',
+    svg: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#000"/><text x="6" y="17" font-size="14" fill="#fff" font-family="Arial" font-weight="bold">[S</text></svg>`
+  },
+  polygon: {
+    name: 'Polygon',
+    svg: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#8247E5"/><path d="M15.5 9.5l-2-1.2c-.3-.2-.7-.2-1 0l-2 1.2c-.3.2-.5.5-.5.9v2.4c0 .4.2.7.5.9l2 1.2c.3.2.7.2 1 0l2-1.2c.3-.2.5-.5.5-.9v-2.4c0-.4-.2-.7-.5-.9z" fill="#fff"/><path d="M9.5 13.3l-1.5-.9c-.2-.1-.3-.3-.3-.5v-1.8c0-.2.1-.4.3-.5l1.5-.9" stroke="#fff" stroke-width="0.8" fill="none"/></svg>`
+  },
+  arbitrum: {
+    name: 'Arbitrum',
+    svg: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#28A0F0"/><path d="M12 5L6 12l6 7 6-7-6-7z" fill="#fff"/><path d="M12 8l-3 4 3 3.5 3-3.5-3-4z" fill="#28A0F0"/></svg>`
+  },
+  optimism: {
+    name: 'Optimism',
+    svg: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#FF0420"/><circle cx="12" cy="12" r="6" fill="#fff"/></svg>`
+  }
+};
+
+// Build facilitator info section
+function buildFacilitatorInfo(facilitator, projectId) {
+  if (!facilitator) return '';
+
+  const networkBadges = (facilitator.networks || [])
+    .map(net => {
+      const icon = NETWORK_ICONS[net.toLowerCase()];
+      if (icon) {
+        return `<span class="network-badge">${icon.svg}${icon.name}</span>`;
+      }
+      return `<span class="network-badge">${net}</span>`;
+    })
+    .join('');
+
+  const statsLink = facilitator.x402scan
+    ? `<a href="https://www.x402scan.com/facilitator/${facilitator.x402scan}" target="_blank" class="facilitator-stats">
+        <img src="https://www.x402scan.com/logo.svg" alt="x402scan">
+        <span>Facilitator Stats</span>
+      </a>`
+    : '';
+
+  const statusId = `endpoint-status-${projectId}`;
+
+  return `
+    <div class="facilitator-info">
+      <div class="facilitator-left">
+        ${statsLink}
+        <div class="facilitator-endpoint">${facilitator.endpoint}<span id="${statusId}" class="endpoint-status checking" data-endpoint="${facilitator.endpoint}">
+          <svg class="status-spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"/></svg>
+          checking...
+        </span></div>
+        <div class="facilitator-networks">${networkBadges}</div>
+      </div>
+    </div>
+  `;
+}
+
+// Build market links (CoinGecko, DexScreener, Trade)
+function buildMarketLinks(token) {
+  const links = [];
+
+  if (token) {
+    // Use coingecko_slug for URL (falls back to coingecko_id)
+    const cgSlug = token.coingecko_slug || token.coingecko_id;
+    if (cgSlug) {
+      links.push(`<a href="https://www.coingecko.com/en/coins/${cgSlug}" target="_blank" class="market-link">
+        <img src="https://static.coingecko.com/s/thumbnail-007177f3eca19695592f0b8b0eabbdae282b54154e1be912285c9034ea6cbaf2.png" alt="CG">
+        <span>CoinGecko</span>
+      </a>`);
+    }
+
+    if (token.network && token.contract_address) {
+      links.push(`<a href="https://dexscreener.com/${token.network}/${token.contract_address}" target="_blank" class="market-link">
+        <img src="https://dexscreener.com/favicon.png" alt="DS">
+        <span>DexScreener</span>
+      </a>`);
+    }
+  }
+
+  return links.join('');
+}
+
+// Render token table row
+function renderTokenRow(project, priceData, sparklineData, rank) {
+  const token = project.token;
+  if (!token) return '';
+
+  const cgData = priceData[token.coingecko_id] || {};
+  const sparkline = sparklineData[token.coingecko_id] || [];
+  const price = cgData.usd || 0;
+  const change24h = cgData.usd_24h_change;
+  const change7d = calc7dChange(sparkline);
+  const mcap = cgData.usd_market_cap || 0;
+  const volume = cgData.usd_24h_vol || 0;
+  const volMcapRatio = mcap > 0 ? (volume / mcap) * 100 : 0;
+
+  const change24hClass = change24h >= 0 ? 'up' : 'down';
+  const change7dClass = change7d >= 0 ? 'up' : 'down';
+  const ratioClass = volMcapRatio > 3 ? 'hot' : '';
+  const sparklineClass = change7d >= 0 ? 'up' : 'down';
+  const sparklinePath = generateSparklinePath(sparkline);
+
+  const facilitatorIcon = project.facilitator
+    ? '<span class="facilitator-icon" title="Facilitator"><svg viewBox="0 0 16 16" width="14" height="14"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 8h6M8.5 5.5L11 8l-2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>'
+    : '';
+
+  const rowId = `row-${project.id}`;
+  const detailLinks = buildLinks(project);
+  const marketLinks = buildMarketLinks(token);
+  const facilitatorInfo = buildFacilitatorInfo(project.facilitator, project.id);
+
+  // Logo with fallback to initials
+  const initials = getInitials(token.symbol);
+  const logoHtml = project.logo
+    ? `<img src="${project.logo}" alt="${token.symbol}" onerror="this.parentElement.innerHTML='${initials}'">`
+    : initials;
+
+  const isHot = volMcapRatio > 3;
+  const tags = (project.tags || []).join(',');
+
+  return `
+    <tr class="expandable" data-target="${rowId}" data-facilitator="${!!project.facilitator}" data-hot="${isHot}" data-tags="${tags}" data-name="${token.name || project.name}" data-symbol="${token.symbol}" data-price="${price}" data-change24h="${change24h || 0}" data-change7d="${change7d || 0}" data-mcap="${mcap}" data-volmcap="${volMcapRatio}" onclick="toggleRow('${rowId}')">
+      <td style="color: var(--ink-muted)">${rank}</td>
+      <td>
+        <div class="token-cell">
+          <div class="token-icon">${logoHtml}</div>
+          <div>
+            <div class="token-name">${token.name || project.name}${facilitatorIcon}</div>
+            <div class="token-symbol">$${token.symbol}</div>
+          </div>
+        </div>
+      </td>
+      <td class="r num price">${price ? formatUSD(price) : '--'}</td>
+      <td class="r num change ${change24h !== undefined ? change24hClass : ''}">${formatChange(change24h)}</td>
+      <td class="r num change ${change7d !== null ? change7dClass : ''}">${formatChange(change7d)}</td>
+      <td class="r num mcap">${mcap ? formatUSD(mcap) : '--'}</td>
+      <td class="r num ratio ${ratioClass}">${volMcapRatio > 0 ? volMcapRatio.toFixed(1) + '%' : '--'}</td>
+      <td class="r">
+        <div class="sparkline ${sparkline.length > 0 ? sparklineClass : 'neutral'}">
+          <svg viewBox="0 0 80 24" preserveAspectRatio="none">
+            <path d="${sparklinePath}"/>
+          </svg>
+        </div>
+      </td>
+    </tr>
+    <tr class="detail-row" id="${rowId}">
+      <td colspan="8">
+        <div class="detail-content">
+          <div class="detail-left">
+            <div class="detail-description">${project.description}</div>
+            <div class="detail-links">${detailLinks}</div>
+          </div>
+          <div class="detail-right">
+            ${marketLinks}
+          </div>
+        </div>
+        ${facilitatorInfo}
+      </td>
+    </tr>
+  `;
+}
+
+// Render ranking item for gainers/losers
+function renderRankingItem(token, change, rank) {
+  const changeClass = change >= 0 ? 'up' : 'down';
+  return `
+    <div class="ranking-item">
+      <div class="rank-left">
+        <span class="rank-pos">${rank}</span>
+        <span class="rank-ticker">$${token.symbol}</span>
+      </div>
+      <span class="rank-value ${changeClass}">${formatChange(change)}</span>
+    </div>
+  `;
+}
+
+// Update stats cards
+function updateStats(projects, priceData) {
+  const tokensWithData = projects.filter(p => p.token?.coingecko_id && priceData[p.token.coingecko_id]);
+
+  let totalMcap = 0;
+  let totalVolume = 0;
+
+  tokensWithData.forEach(p => {
+    const data = priceData[p.token.coingecko_id];
+    totalMcap += data.usd_market_cap || 0;
+    totalVolume += data.usd_24h_vol || 0;
+  });
+
+  document.getElementById('stat-mcap').textContent = totalMcap > 0 ? formatUSD(totalMcap) : '--';
+  document.getElementById('stat-volume').textContent = totalVolume > 0 ? formatUSD(totalVolume) : '--';
+  document.getElementById('stat-projects').textContent = projects.length;
+  document.getElementById('stat-tokens').textContent = projects.filter(p => p.token).length + ' with tokens';
+  document.getElementById('stat-facilitators').textContent = projects.filter(p => p.facilitator).length;
+}
+
+// Update gainers/losers panels
+function updateGainersLosers(projects, priceData) {
+  const tokensWithChange = projects
+    .filter(p => p.token?.coingecko_id && priceData[p.token.coingecko_id]?.usd_24h_change !== undefined)
+    .map(p => ({
+      token: p.token,
+      change: priceData[p.token.coingecko_id].usd_24h_change
+    }))
+    .sort((a, b) => b.change - a.change);
+
+  const gainersEl = document.getElementById('top-gainers');
+  const losersEl = document.getElementById('top-losers');
+
+  const gainers = tokensWithChange.filter(t => t.change > 0).slice(0, 3);
+  const losers = tokensWithChange.filter(t => t.change < 0).sort((a, b) => a.change - b.change).slice(0, 3);
+
+  gainersEl.innerHTML = gainers.length > 0
+    ? gainers.map((t, i) => renderRankingItem(t.token, t.change, i + 1)).join('')
+    : '<div class="ranking-item" style="color: var(--ink-muted)">No data</div>';
+
+  losersEl.innerHTML = losers.length > 0
+    ? losers.map((t, i) => renderRankingItem(t.token, t.change, i + 1)).join('')
+    : '<div class="ranking-item" style="color: var(--ink-muted)">No data</div>';
+}
+
+// Update x402 Momentum indicator
+function updateX402Momentum(projects, priceData) {
+  const btcData = priceData['bitcoin'];
+  if (!btcData) return;
+
+  const btcChange = btcData.usd_24h_change || 0;
+
+  // Get tokens with price data
+  const tokensWithData = projects.filter(p =>
+    p.token?.coingecko_id &&
+    p.token.coingecko_id !== 'bitcoin' &&
+    priceData[p.token.coingecko_id]?.usd_24h_change !== undefined &&
+    priceData[p.token.coingecko_id]?.usd_market_cap > 0
+  );
+
+  if (tokensWithData.length === 0) return;
+
+  // Calculate metrics
+  let totalMcap = 0;
+  let totalVolume = 0;
+  let weightedChangeSum = 0;
+  let beatingBtcCount = 0;
+
+  tokensWithData.forEach(p => {
+    const data = priceData[p.token.coingecko_id];
+    const mcap = data.usd_market_cap || 0;
+    const volume = data.usd_24h_vol || 0;
+    const change = data.usd_24h_change || 0;
+
+    totalMcap += mcap;
+    totalVolume += volume;
+    weightedChangeSum += change * mcap;
+
+    if (change > btcChange) beatingBtcCount++;
+  });
+
+  const x402IndexChange = totalMcap > 0 ? weightedChangeSum / totalMcap : 0;
+  const vsBtc = x402IndexChange - btcChange;
+  const breadth = beatingBtcCount / tokensWithData.length; // 0-1
+  const avgVolMcap = totalMcap > 0 ? (totalVolume / totalMcap) * 100 : 0; // as %
+
+  // Calculate composite momentum score (0-100)
+  // Performance vs BTC: normalize to ~0-50 range (clamped), then weight 60%
+  const perfScore = Math.max(0, Math.min(100, 50 + vsBtc * 5));
+  // Breadth: 0-100 based on % beating BTC, weight 30%
+  const breadthScore = breadth * 100;
+  // Activity: vol/mcap > 5% is very active, normalize, weight 10%
+  const activityScore = Math.min(100, avgVolMcap * 20);
+
+  const momentum = (perfScore * 0.6) + (breadthScore * 0.3) + (activityScore * 0.1);
+  const momentumClamped = Math.max(0, Math.min(100, momentum));
+
+  // Update DOM
+  const valueEl = document.getElementById('vsBtcValue');
+  const beatingEl = document.getElementById('beatingBtc');
+  const markerEl = document.getElementById('gaugeMarker');
+
+  // vs BTC value
+  const sign = vsBtc >= 0 ? '+' : '';
+  valueEl.textContent = sign + vsBtc.toFixed(1) + '%';
+  valueEl.className = 'stat-val ' + (vsBtc >= 0 ? 'up' : 'down');
+
+  // Beating BTC count
+  beatingEl.textContent = `${beatingBtcCount}/${tokensWithData.length}`;
+
+  // Gauge marker position (0-100 maps to 0%-100% left)
+  markerEl.style.left = momentumClamped + '%';
+  markerEl.classList.remove('hot', 'cold');
+  if (momentumClamped >= 60) markerEl.classList.add('hot');
+  else if (momentumClamped <= 40) markerEl.classList.add('cold');
+}
+
+// Main init
+async function init() {
+  try {
+    // Initialize theme
+    initTheme();
+
+    // Load projects
+    const projects = await loadProjects();
+
+    // Initialize tags filter buttons
+    initTagsFilter(projects);
+
+    // Load pre-fetched price data (from GitHub Action)
+    const { prices: priceData, sparklines: sparklineData } = await loadPriceData();
+
+    // Filter to only projects with tokens and sort by market cap
+    const tokenProjects = projects
+      .filter(p => p.token)
+      .map(p => ({
+        ...p,
+        mcap: priceData[p.token?.coingecko_id]?.usd_market_cap || 0
+      }))
+      .sort((a, b) => b.mcap - a.mcap);
+
+    // Render table
+    const tbody = document.getElementById('token-table-body');
+    if (tokenProjects.length > 0) {
+      tbody.innerHTML = tokenProjects
+        .map((p, i) => renderTokenRow(p, priceData, sparklineData, i + 1))
+        .join('');
+    } else {
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 40px; color: var(--ink-muted);">No tokens listed yet</td></tr>';
+    }
+
+    // Update stats
+    updateStats(projects, priceData);
+
+    // Update gainers/losers
+    updateGainersLosers(projects, priceData);
+
+    // Update x402 Momentum indicator
+    updateX402Momentum(projects, priceData);
+
+    // Update status
+    document.querySelector('.status').innerHTML = '<span class="live">●</span> Live · just now';
+
+    // Ping facilitator endpoints (after a short delay to let DOM settle)
+    setTimeout(pingAllEndpoints, 500);
+
+  } catch (err) {
+    console.error('Init error:', err);
+    document.getElementById('token-table-body').innerHTML =
+      '<tr><td colspan="8" style="text-align: center; padding: 40px; color: var(--red);">Error loading data</td></tr>';
+  }
+}
+
+// Modal functions
+function openAboutModal() {
+  document.getElementById('aboutModal').classList.add('open');
+}
+
+function closeAboutModal() {
+  document.getElementById('aboutModal').classList.remove('open');
+}
+
+// State for filtering and sorting
+let currentFilter = 'all';
+let currentTagFilter = null;
+let currentSort = { field: 'mcap', direction: 'desc' };
+let allTags = new Set();
+
+// Set filter (all/facilitators/hot)
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-group:first-child .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+// Set tag filter
+function setTagFilter(tag, btn) {
+  if (currentTagFilter === tag) {
+    currentTagFilter = null;
+    btn.classList.remove('active');
+  } else {
+    currentTagFilter = tag;
+    document.querySelectorAll('#tagsFilter .tag-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  applyFilters();
+}
+
+// Apply all filters (search + type + tags)
+function applyFilters() {
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+  const rows = document.querySelectorAll('#token-table-body tr.expandable');
+
+  rows.forEach(row => {
+    const detailRow = document.getElementById(row.dataset.target);
+    const name = (row.dataset.name || '').toLowerCase();
+    const symbol = (row.dataset.symbol || '').toLowerCase();
+    const tags = (row.dataset.tags || '').toLowerCase().split(',');
+    const isFacilitator = row.dataset.facilitator === 'true';
+    const isHot = row.dataset.hot === 'true';
+
+    // Search filter
+    const matchesSearch = !searchTerm || name.includes(searchTerm) || symbol.includes(searchTerm);
+
+    // Type filter (all/facilitators/hot)
+    let matchesType = true;
+    if (currentFilter === 'facilitators') matchesType = isFacilitator;
+    else if (currentFilter === 'hot') matchesType = isHot;
+
+    // Tag filter
+    const matchesTag = !currentTagFilter || tags.includes(currentTagFilter.toLowerCase());
+
+    const show = matchesSearch && matchesType && matchesTag;
+    row.style.display = show ? '' : 'none';
+    if (detailRow) {
+      detailRow.style.display = show && detailRow.classList.contains('open') ? '' : 'none';
+    }
+  });
+
+  renumberVisibleRows();
+}
+
+// Renumber visible rows
+function renumberVisibleRows() {
+  const rows = document.querySelectorAll('#token-table-body tr.expandable');
+  let visibleIndex = 1;
+  rows.forEach(row => {
+    if (row.style.display !== 'none') {
+      row.querySelector('td:first-child').textContent = visibleIndex++;
+    }
+  });
+}
+
+// Sort table
+function sortTable(field, th) {
+  const headers = document.querySelectorAll('th.sortable');
+  headers.forEach(h => {
+    if (h !== th) {
+      h.classList.remove('asc', 'desc');
+    }
+  });
+
+  // Toggle direction
+  if (currentSort.field === field) {
+    currentSort.direction = currentSort.direction === 'desc' ? 'asc' : 'desc';
+  } else {
+    currentSort.field = field;
+    currentSort.direction = 'desc';
+  }
+
+  th.classList.remove('asc', 'desc');
+  th.classList.add(currentSort.direction);
+
+  const tbody = document.getElementById('token-table-body');
+  const rows = Array.from(tbody.querySelectorAll('tr.expandable'));
+
+  rows.sort((a, b) => {
+    const aVal = parseFloat(a.dataset[field]) || 0;
+    const bVal = parseFloat(b.dataset[field]) || 0;
+    return currentSort.direction === 'desc' ? bVal - aVal : aVal - bVal;
+  });
+
+  // Reorder DOM (move each row and its detail row)
+  rows.forEach(row => {
+    const detailRow = document.getElementById(row.dataset.target);
+    tbody.appendChild(row);
+    if (detailRow) tbody.appendChild(detailRow);
+  });
+
+  renumberVisibleRows();
+}
+
+// Initialize tags filter buttons
+function initTagsFilter(projects) {
+  projects.forEach(p => {
+    (p.tags || []).forEach(tag => allTags.add(tag));
+  });
+
+  const container = document.getElementById('tagsFilter');
+  if (allTags.size > 0) {
+    container.innerHTML = Array.from(allTags).map(tag =>
+      `<button class="tag-btn" onclick="setTagFilter('${tag}', this)">${tag}</button>`
+    ).join('');
+  }
+}
+
+// Theme toggle
+function toggleTheme() {
+  const html = document.documentElement;
+  const currentTheme = html.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', newTheme);
+  localStorage.setItem('x402view-theme', newTheme);
+}
+
+// Initialize theme from localStorage
+function initTheme() {
+  const saved = localStorage.getItem('x402view-theme');
+  if (saved) {
+    document.documentElement.setAttribute('data-theme', saved);
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+}
+
+// Ping facilitator endpoint
+async function pingEndpoint(endpoint, statusId) {
+  const statusEl = document.getElementById(statusId);
+  if (!statusEl) return;
+
+  try {
+    // Try to fetch with no-cors mode (just checks if something responds)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+    await fetch(endpoint, {
+      method: 'HEAD',
+      mode: 'no-cors',
+      signal: controller.signal
+    });
+
+    clearTimeout(timeoutId);
+
+    // If we get here, something responded
+    statusEl.className = 'endpoint-status online';
+    statusEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>online`;
+  } catch (err) {
+    statusEl.className = 'endpoint-status offline';
+    statusEl.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/></svg>offline`;
+  }
+}
+
+// Ping all visible facilitator endpoints
+function pingAllEndpoints() {
+  const endpoints = document.querySelectorAll('.endpoint-status[data-endpoint]');
+  endpoints.forEach(el => {
+    pingEndpoint(el.dataset.endpoint, el.id);
+  });
+}
+
+// Toggle expandable row
+function toggleRow(rowId) {
+  const row = document.getElementById(rowId);
+  if (row) {
+    const wasOpen = row.classList.contains('open');
+    row.classList.toggle('open');
+
+    // If opening, check for endpoint status to ping
+    if (!wasOpen) {
+      const statusEl = row.querySelector('.endpoint-status[data-endpoint]');
+      if (statusEl && statusEl.classList.contains('checking')) {
+        pingEndpoint(statusEl.dataset.endpoint, statusEl.id);
+      }
+    }
+  }
+}
+
+// Start
+init();
+
+// Refresh every 5 minutes
+setInterval(init, 5 * 60 * 1000);
+</script>
+
+<!--
+================================================================================
+x402view MOCKUP - MONOCHROME WITH DATA COLORS
+================================================================================
+
+TYPOGRAPHY:
+- Body: Inter (industry standard for dashboards)
+- Numbers/Tickers: Roboto Mono (neutral, pairs well with Inter)
+
+COLOR SCHEME (Mostly Monochrome):
+- Background: #fafafa (light gray)
+- Surface: #ffffff (white cards)
+- Ink: #1a1a1a (near black)
+- Ink secondary: #444
+- Ink muted: #888
+- Border: #e5e5e5 (light gray)
+
+DATA COLORS ONLY:
+- Green: #059669 (gains)
+- Red: #dc2626 (losses)
+- Amber: #b45309 (hot ratios only - used very sparingly)
+- Blue: #0369a1 (links)
+
+DESIGN NOTES:
+- Monochrome UI, color only for data
+- Black primary button (neutral, not branded)
+- Gray token icons with borders
+- Subtle facilitator badges
+- Inter for body, Roboto Mono for numbers
+- Logo at 48px height
+
+================================================================================
+-->
+
+</body>
+</html>

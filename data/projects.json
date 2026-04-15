@@ -1,0 +1,278 @@
+{
+  "projects": [
+    {
+      "id": "primer",
+      "name": "Primer Systems",
+      "description": "x402 facilitator, WordPress plugin, ecosystem tools",
+      "website": "https://primer.systems",
+      "docs": "https://docs.primer.systems",
+      "twitter": "primersystems",
+      "telegram": "Primer_HQ",
+      "discord": null,
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": "primersystems",
+      "github": "primersystems",
+      "logo": "assets/logos/primer.png",
+      "tags": ["infrastructure", "consumer"],
+      "facilitator": {
+        "endpoint": "https://x402.primer.systems",
+        "networks": ["base", "skale"],
+        "x402scan": "primer"
+      },
+      "token": {
+        "symbol": "PR",
+        "name": "Primer",
+        "network": "base",
+        "contract_address": "0x2357110F5F0c5344EEf75966500c75116A4aA153",
+        "coingecko_id": "kilt-protocol-3",
+        "coingecko_slug": "primer"
+      }
+    },
+    {
+      "id": "eigencloud",
+      "name": "EigenCloud",
+      "description": "Verifiable cloud for the Agentic Era",
+      "website": "https://eigencloud.xyz",
+      "docs": "https://docs.eigencloud.xyz",
+      "twitter": "eigencloud",
+      "telegram": "EigenCloudSupp",
+      "discord": "eigenlayer",
+      "farcaster": null,
+      "youtube": "@EigenCloud",
+      "reddit": null,
+      "medium": null,
+      "github": "Layr-Labs",
+      "logo": "assets/logos/eigencloud.png",
+      "tags": ["infrastructure"],
+      "facilitator": null,
+      "token": {
+        "symbol": "EIGEN",
+        "name": "EigenCloud",
+        "network": "ethereum",
+        "contract_address": "0xec53bf9167f50cdeb3ae105f56099aaab9061f83",
+        "coingecko_id": "eigenlayer",
+        "coingecko_slug": "eigencloud"
+      }
+    },
+    {
+      "id": "unibase",
+      "name": "Unibase",
+      "description": "Decentralized memory layer for AI agents with x402 facilitator",
+      "website": "https://unibase.com",
+      "docs": "https://openos-labs.gitbook.io/unibase-docs",
+      "twitter": "Unibase_AI",
+      "telegram": "unibase_ai",
+      "discord": null,
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": null,
+      "github": "unibaseio",
+      "logo": "assets/logos/unibase.png",
+      "tags": ["infrastructure"],
+      "facilitator": {
+        "endpoint": "https://x402.unibase.com",
+        "networks": ["bnb"],
+        "x402scan": null
+      },
+      "token": {
+        "symbol": "UB",
+        "name": "Unibase",
+        "network": "ethereum",
+        "contract_address": "0x6944e1df6bf5972305f9ab25df47ef10de01bcc8",
+        "coingecko_id": "unibase"
+      }
+    },
+    {
+      "id": "skale",
+      "name": "SKALE Network",
+      "description": "Zero-gas blockchain with native x402 and ERC-8004 support",
+      "website": "https://skale.space",
+      "docs": "https://docs.skale.space",
+      "twitter": "SkaleNetwork",
+      "telegram": "skaleofficial",
+      "discord": "skale",
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": null,
+      "github": "skalenetwork",
+      "logo": "assets/logos/skale.png",
+      "tags": ["infrastructure"],
+      "facilitator": null,
+      "token": {
+        "symbol": "SKL",
+        "name": "SKALE",
+        "network": "ethereum",
+        "contract_address": "0x00c83aecc790e8a4453e5dd3b0b4b3680501a7a7",
+        "coingecko_id": "skale"
+      }
+    },
+    {
+      "id": "concordium",
+      "name": "Concordium",
+      "description": "Layer-1 blockchain with ID layer and x402 payment integration",
+      "website": "https://concordium.com",
+      "docs": "https://developer.concordium.software",
+      "twitter": "Concordium",
+      "telegram": "concordium_official",
+      "discord": "concordium",
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": null,
+      "github": "Concordium",
+      "logo": "assets/logos/concordium.png",
+      "tags": ["infrastructure"],
+      "facilitator": null,
+      "token": {
+        "symbol": "CCD",
+        "name": "Concordium",
+        "network": "concordium",
+        "contract_address": null,
+        "coingecko_id": "concordium"
+      }
+    },
+    {
+      "id": "bankr",
+      "name": "Bankr",
+      "description": "AI agent platform with x402 Cloud for agent payments",
+      "website": "https://bankr.bot",
+      "docs": null,
+      "twitter": "bankrbot",
+      "telegram": "bankrbot",
+      "discord": null,
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": null,
+      "github": null,
+      "logo": "assets/logos/bankr.png",
+      "tags": ["infrastructure", "services"],
+      "facilitator": null,
+      "token": {
+        "symbol": "BNKR",
+        "name": "Bankr",
+        "network": "base",
+        "contract_address": "0x22af33fe49fd1fa80c7149773dde5890d3c76f3b",
+        "coingecko_id": "bankercoin-2"
+      }
+    },
+    {
+      "id": "peaq",
+      "name": "peaq",
+      "description": "DePIN Layer-1 with x402 protocol integration for machine payments",
+      "website": "https://peaq.network",
+      "docs": "https://docs.peaq.network",
+      "twitter": "peaboratories",
+      "telegram": "peaboratories",
+      "discord": "peaq",
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": null,
+      "github": "peaqnetwork",
+      "logo": "assets/logos/peaq.png",
+      "tags": ["infrastructure"],
+      "facilitator": null,
+      "token": {
+        "symbol": "PEAQ",
+        "name": "peaq",
+        "network": "peaq",
+        "contract_address": null,
+        "coingecko_id": "peaq-2"
+      }
+    },
+    {
+      "id": "amiko",
+      "name": "Amiko",
+      "description": "AI companion with x402 payments, Solana Hackathon Best Trustless Agent",
+      "website": "https://amiko.ai",
+      "docs": null,
+      "twitter": "Hey_Amiko",
+      "telegram": null,
+      "discord": null,
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": null,
+      "github": null,
+      "logo": "assets/logos/amiko.png",
+      "tags": ["consumer"],
+      "facilitator": null,
+      "token": {
+        "symbol": "AMIKO",
+        "name": "Amiko",
+        "network": "solana",
+        "contract_address": "AY1Ww6MxwC3cCiyrandHqLrp4FXvzgcwQTZpJ2FEpump",
+        "coingecko_id": "amiko"
+      }
+    },
+    {
+      "id": "treasure",
+      "name": "Treasure",
+      "description": "AI-native gaming ecosystem with x402 facilitator for MAGIC payments",
+      "website": "https://treasure.lol",
+      "docs": null,
+      "twitter": "Treasure_DAO",
+      "telegram": null,
+      "discord": "treasuredao",
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": "Treasure_DAO",
+      "github": "TreasureProject",
+      "logo": "assets/logos/treasure.png",
+      "tags": ["infrastructure", "consumer"],
+      "facilitator": {
+        "endpoint": "https://x402.treasure.lol/facilitator",
+        "networks": ["base"],
+        "x402scan": null
+      },
+      "token": {
+        "symbol": "MAGIC",
+        "name": "Treasure",
+        "network": "base",
+        "contract_address": "0xf1572d1da5c3cce14ee5a1c9327d17e9ff0e3f43",
+        "coingecko_id": "magic"
+      }
+    },
+    {
+      "id": "flock",
+      "name": "FLock.io",
+      "description": "Decentralized federated learning platform for AI model training",
+      "website": "https://flock.io",
+      "docs": "https://docs.flock.io",
+      "twitter": "flock_io",
+      "telegram": "flock_io_community",
+      "discord": "ay8MnJCg2W",
+      "farcaster": null,
+      "youtube": "@flock-io",
+      "reddit": null,
+      "medium": "flock-io",
+      "github": "FLock-io",
+      "logo": "assets/logos/flock.png",
+      "tags": ["services"],
+      "facilitator": null,
+      "token": {
+        "symbol": "FLOCK",
+        "name": "FLOCK",
+        "network": "base",
+        "contract_address": "0x5ab3d4c385b400f3abb49e80de2faf6a88a7b691",
+        "coingecko_id": "flock-2"
+      }
+    }
+  ],
+  "_meta": {
+    "version": "0.2.0",
+    "updated": "2026-04-14",
+    "allowed_tags": ["infrastructure", "services", "analytics", "consumer"],
+    "notes": {
+      "price_data": "If coingecko_id exists, use CG API. Otherwise use DexScreener with network + contract_address",
+      "logos": "200x200 PNG at assets/logos/{id}.png. Fallback to initials if missing.",
+      "tags": "Projects must use only tags from allowed_tags. Multiple tags permitted."
+    }
+  }
+}

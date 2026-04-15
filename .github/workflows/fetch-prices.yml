@@ -1,0 +1,33 @@
+name: Fetch Prices
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # Every 5 minutes
+  workflow_dispatch:  # Allow manual trigger
+  push:
+    paths:
+      - 'data/projects.json'  # Re-fetch when projects change
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch prices from CoinGecko
+        run: node scripts/fetch-prices.js
+
+      - name: Commit updated prices
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/prices.json
+          git diff --staged --quiet || git commit -m "chore: Update prices"
+          git push
