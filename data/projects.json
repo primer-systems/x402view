@@ -1353,7 +1353,7 @@
       "reddit": null,
       "medium": null,
       "github": "moonshot-cyber/agent-health-monitor",
-      "logo": null,
+      "logo": "assets/logos/ahm.png",
       "tags": ["services", "analytics"],
       "facilitator": null,
       "token": null
