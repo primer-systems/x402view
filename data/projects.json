@@ -1340,6 +1340,25 @@
       }
     },
     {
+      "id": "ahm",
+      "name": "Agent Health Monitor (AHM)",
+      "description": "Diagnostic layer for autonomous agents — trust, health & performance scoring via x402",
+      "website": "https://agenthealthmonitor.xyz",
+      "docs": null,
+      "twitter": "AHMprotocol",
+      "telegram": null,
+      "discord": null,
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": null,
+      "github": "moonshot-cyber/agent-health-monitor",
+      "logo": null,
+      "tags": ["services", "analytics"],
+      "facilitator": null,
+      "token": null
+    },
+    {
       "id": "trackgood",
       "name": "Trackgood AI",
       "description": null,
