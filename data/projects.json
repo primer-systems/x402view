@@ -31,6 +31,25 @@
       }
     },
     {
+      "id": "satoshi-api",
+      "name": "Satoshi API",
+      "description": "Bitcoin fee intelligence API with x402 pay-per-call endpoints for agents",
+      "website": "https://bitcoinsapi.com",
+      "docs": "https://bitcoinsapi.com/x402/start?utm_source=x402view&utm_medium=directory&utm_campaign=x402_marketplaces",
+      "twitter": null,
+      "telegram": null,
+      "discord": null,
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": null,
+      "github": "Bortlesboat/bitcoin-api",
+      "logo": null,
+      "tags": ["services"],
+      "facilitator": null,
+      "token": null
+    },
+    {
       "id": "eigencloud",
       "name": "EigenCloud",
       "description": "Verifiable cloud for the Agentic Era",
