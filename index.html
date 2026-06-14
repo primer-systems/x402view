@@ -1276,12 +1276,12 @@
     .nav-tabs {
       display: flex;
       gap: 0;
-      margin-bottom: 24px;
+      margin-bottom: 0;
     }
 
     .nav-tab {
-      padding: 12px 24px;
-      font-size: 14px;
+      padding: 10px 20px;
+      font-size: 13px;
       font-weight: 500;
       color: var(--ink-muted);
       text-decoration: none;
@@ -1313,9 +1313,9 @@
       z-index: 1;
     }
 
-    .nav-tab-content {
-      border-top: 1px solid var(--border);
-      margin-top: -1px;
+    .section.tabbed {
+      border-top: none;
+      border-radius: 0 4px 0 0;
     }
   </style>
 </head>
@@ -1419,7 +1419,7 @@
   </div>
 
   <!-- Token Rankings -->
-  <div class="section">
+  <div class="section tabbed">
     <div class="section-header">
       <div>
         <div class="section-title">Token Rankings</div>

@@ -256,13 +256,14 @@
     .filter-btn {
       display: inline-flex;
       align-items: center;
-      padding: 6px 12px;
+      padding: 5px 10px;
       font-size: 11px;
       font-family: inherit;
       border: 1px solid var(--border);
       background: var(--surface);
       color: var(--ink-muted);
       cursor: pointer;
+      white-space: nowrap;
     }
 
     .filter-btn:hover,
@@ -1276,12 +1277,12 @@
     .nav-tabs {
       display: flex;
       gap: 0;
-      margin-bottom: 24px;
+      margin-bottom: 0;
     }
 
     .nav-tab {
-      padding: 12px 24px;
-      font-size: 14px;
+      padding: 10px 20px;
+      font-size: 13px;
       font-weight: 500;
       color: var(--ink-muted);
       text-decoration: none;
@@ -1313,9 +1314,9 @@
       z-index: 1;
     }
 
-    .nav-tab-content {
-      border-top: 1px solid var(--border);
-      margin-top: -1px;
+    .section.tabbed {
+      border-top: none;
+      border-radius: 0 4px 0 0;
     }
 
     /* Ecosystem-specific styles */
@@ -1494,17 +1495,10 @@
   </div>
 
   <!-- Ecosystem Directory -->
-  <div class="section">
-    <div class="section-header">
-      <div>
-        <div class="section-title">Ecosystem Directory</div>
-        <div class="section-subtitle">Projects submitted to x402.org repository</div>
-      </div>
-      <div class="section-actions">
-        <input type="text" class="search-input" id="searchInput" placeholder="Search projects..." oninput="filterProjects()">
-        <div class="filter-separator"></div>
-        <div class="filter-group" id="categoryFilters"></div>
-      </div>
+  <div class="section tabbed">
+    <div class="section-header" style="padding: 12px 16px; gap: 12px;">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search..." oninput="filterProjects()" style="width: 160px;">
+      <div class="filter-group" id="categoryFilters" style="flex-wrap: wrap; gap: 6px;"></div>
     </div>
     <div style="padding: 20px;">
       <div class="ecosystem-grid" id="ecosystem-grid">
@@ -1558,11 +1552,19 @@
       // Update last updated
       document.getElementById('lastUpdated').textContent = new Date(data._meta.fetchedAt).toLocaleDateString();
 
-      // Build category filters
+      // Build category filters with abbreviated names
+      const categoryLabels = {
+        'Client-Side Integrations': 'Client-Side',
+        'Facilitators': 'Facilitators',
+        'Infrastructure & Tooling': 'Infra & Tooling',
+        'Learning & Community Resources': 'Learning & Community',
+        'Services/Endpoints': 'Services/Endpoints',
+        'Web3 Application & Infrastructure': 'Web3 Apps & Infra'
+      };
       const categories = [...new Set(ecosystemData.map(p => p.category))].sort();
       const filtersEl = document.getElementById('categoryFilters');
       filtersEl.innerHTML = '<button class="filter-btn active" onclick="setFilter(\'all\', this)">All</button>' +
-        categories.map(c => `<button class="filter-btn" onclick="setFilter('${c}', this)">${c.replace(' & ', ' & ')}</button>`).join('');
+        categories.map(c => `<button class="filter-btn" onclick="setFilter('${c}', this)">${categoryLabels[c] || c}</button>`).join('');
 
       renderProjects();
     } catch (e) {
