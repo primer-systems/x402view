@@ -1420,24 +1420,14 @@
 
   <!-- Token Rankings -->
   <div class="section tabbed">
-    <div class="section-header">
-      <div>
-        <div class="section-title">Token Rankings</div>
-        <div class="section-subtitle">x402 ecosystem tokens by market cap</div>
+    <div class="section-header" style="padding: 12px 16px; gap: 12px;">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search..." oninput="applyFilters()" style="width: 160px;">
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">All</button>
+        <button class="filter-btn" data-filter="facilitators" onclick="setFilter('facilitators', this)"><svg viewBox="0 0 16 16" width="14" height="14" style="margin-right: 4px;"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 8h6M8.5 5.5L11 8l-2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Facilitators</button>
+        <button class="filter-btn" data-filter="hot" onclick="setFilter('hot', this)">Hot</button>
       </div>
-      <div class="section-actions">
-        <input type="text" class="search-input" id="searchInput" placeholder="Search tokens..." oninput="applyFilters()">
-        <div class="filter-separator"></div>
-        <div class="filters-row">
-          <div class="filter-group">
-            <button class="filter-btn active" data-filter="all" onclick="setFilter('all', this)">All</button>
-            <button class="filter-btn" data-filter="facilitators" onclick="setFilter('facilitators', this)"><svg viewBox="0 0 16 16" width="14" height="14" style="margin-right: 4px;"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 8h6M8.5 5.5L11 8l-2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Facilitators</button>
-            <button class="filter-btn" data-filter="hot" onclick="setFilter('hot', this)">Hot</button>
-          </div>
-          <div class="filter-separator"></div>
-          <div class="filter-group" id="tagsFilter"></div>
-        </div>
-      </div>
+      <div class="filter-group" id="tagsFilter"></div>
     </div>
     <table>
       <thead>

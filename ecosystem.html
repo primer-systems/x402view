@@ -1620,13 +1620,9 @@
             <div class="ecosystem-category">${project.category}</div>
           </div>
           <div class="ecosystem-description">${project.description || 'No description available.'}</div>
-          ${isFacilitator ? `
-            <div class="ecosystem-facilitator">
-              <svg viewBox="0 0 16 16" width="12" height="12"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5 8h6M8.5 5.5L11 8l-2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Facilitator
-            </div>
+          ${isFacilitator && project.facilitator.networks?.length ? `
             <div class="ecosystem-networks">
-              ${(project.facilitator.networks || []).map(n => `<span class="ecosystem-network">${n}</span>`).join('')}
+              ${project.facilitator.networks.map(n => `<span class="ecosystem-network">${n}</span>`).join('')}
             </div>
           ` : ''}
           <div class="ecosystem-links">
