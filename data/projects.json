@@ -1363,6 +1363,25 @@
         "contract_address": null,
         "coingecko_id": "trackgood-ai"
       }
+    },
+    {
+      "id": "colombia-trm",
+      "name": "Colombia TRM",
+      "description": "Official Colombian TRM (USD/COP) prepaid x402 data feed. $0.005 USDC.",
+      "website": "https://x402.lagaceta.net/trm",
+      "docs": "https://x402.lagaceta.net/llms.txt",
+      "twitter": null,
+      "telegram": null,
+      "discord": null,
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": null,
+      "github": "unicentrocucuta/pe-x402-gateway",
+      "logo": null,
+      "tags": ["services"],
+      "facilitator": null,
+      "token": null
     }
   ],
   "_meta": {
