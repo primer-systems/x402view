@@ -2,7 +2,7 @@
   "_meta": {
     "source": "https://github.com/x402-foundation/x402",
     "fetchedAt": "2026-06-14T14:18:10.681Z",
-    "count": 206
+    "count": 207
   },
   "projects": [
     {
@@ -1769,6 +1769,13 @@
       "websiteUrl": "https://x402.rencom.ai",
       "category": "Services/Endpoints",
       "_id": "rencom"
+    },
+    {
+      "name": "Revenue Dojo",
+      "description": "Live x402 agent-payment verifier and paid API with receipt checks, audit reports, research, MCP calls, and crypto data on Base.",
+      "websiteUrl": "https://x402.167-172-95-184.nip.io",
+      "category": "Services/Endpoints",
+      "_id": "revenue-dojo"
     },
     {
       "name": "Robtex",
