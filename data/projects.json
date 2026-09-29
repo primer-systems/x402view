@@ -1363,8 +1363,27 @@
         "contract_address": null,
         "coingecko_id": "trackgood-ai"
       }
+    },
+            {
+      "id": "agenttrust",
+      "name": "AgentTrust",
+      "description": "Reputation scores for AI agents, pay-per-call via x402 on Base",
+      "website": "https://api.atatrust.xyz",
+      "docs": "https://api.atatrust.xyz",
+      "twitter": null,
+      "telegram": null,
+      "discord": null,
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": null,
+      "github": null,
+      "logo": "assets/logos/agenttrust.png",
+      "tags": ["services", "analytics"],
+      "facilitator": null,
+      "token": null
     }
-  ],
+],
   "_meta": {
     "version": "0.4.0",
     "updated": "2026-04-20",
