@@ -15,10 +15,16 @@
       "medium": "primersystems",
       "github": "primersystems",
       "logo": "assets/logos/primer.png",
-      "tags": ["infrastructure", "consumer"],
+      "tags": [
+        "infrastructure",
+        "consumer"
+      ],
       "facilitator": {
         "endpoint": "https://x402.primer.systems",
-        "networks": ["base", "skale"],
+        "networks": [
+          "base",
+          "skale"
+        ],
         "x402scan": "primer"
       },
       "token": {
@@ -45,7 +51,9 @@
       "medium": null,
       "github": "Layr-Labs",
       "logo": "assets/logos/eigencloud.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "EIGEN",
@@ -71,10 +79,14 @@
       "medium": null,
       "github": "unibaseio",
       "logo": "assets/logos/unibase.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": {
         "endpoint": "https://x402.unibase.com",
-        "networks": ["bnb"],
+        "networks": [
+          "bnb"
+        ],
         "x402scan": null
       },
       "token": {
@@ -100,7 +112,9 @@
       "medium": null,
       "github": "skalenetwork",
       "logo": "assets/logos/skale.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "SKL",
@@ -125,7 +139,9 @@
       "medium": "@concordium",
       "github": "Concordium",
       "logo": "assets/logos/concordium.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "CCD",
@@ -150,7 +166,10 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/bankr.png",
-      "tags": ["infrastructure", "services"],
+      "tags": [
+        "infrastructure",
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "BNKR",
@@ -175,7 +194,9 @@
       "medium": null,
       "github": "peaqnetwork",
       "logo": "assets/logos/peaq.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "PEAQ",
@@ -200,7 +221,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/amiko.png",
-      "tags": ["consumer"],
+      "tags": [
+        "consumer"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "AMIKO",
@@ -225,10 +248,15 @@
       "medium": null,
       "github": "TreasureProject",
       "logo": "assets/logos/treasure.png",
-      "tags": ["infrastructure", "consumer"],
+      "tags": [
+        "infrastructure",
+        "consumer"
+      ],
       "facilitator": {
         "endpoint": "https://x402.treasure.lol/facilitator",
-        "networks": ["base"],
+        "networks": [
+          "base"
+        ],
         "x402scan": null
       },
       "token": {
@@ -254,7 +282,9 @@
       "medium": null,
       "github": "FLock-io",
       "logo": "assets/logos/flock.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "FLOCK",
@@ -279,7 +309,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/elsa.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "ELSA",
@@ -304,7 +336,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/payai.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "PAYAI",
@@ -329,7 +363,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/daydreams.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "DREAMS",
@@ -354,7 +390,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/dexter.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "DEXTER",
@@ -379,7 +417,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/anyspend.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "ANY",
@@ -404,7 +444,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/ping.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "PING",
@@ -429,7 +471,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/heurist.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "HEU",
@@ -454,7 +498,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/0xgasless.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "0XGAS",
@@ -479,7 +525,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/neurobro.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "BRO",
@@ -504,7 +552,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/ace.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "ACE",
@@ -529,7 +579,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/xona.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "XONA",
@@ -554,7 +606,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/wachai.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "WACH",
@@ -579,7 +633,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/gloria.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "GLORIA",
@@ -604,7 +660,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/ethy.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "ETHY",
@@ -629,7 +687,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/aubrai.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "AUBRAI",
@@ -654,7 +714,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/alphakek.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "AIKEK",
@@ -679,7 +741,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/otto.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "OTTO",
@@ -704,7 +768,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/swarm.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "SWARM",
@@ -729,7 +795,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/prxvt.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "PRXVT",
@@ -754,7 +822,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/capminal.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "CAP",
@@ -779,7 +849,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/tmai.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "TMAI",
@@ -804,7 +876,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/homebrew.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "BREW",
@@ -829,7 +903,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/x4pay.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "X4PAY",
@@ -854,7 +930,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/bridge402.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "BRIDGE402",
@@ -879,7 +957,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/sol402.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "SOL402",
@@ -904,7 +984,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/autonolas.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "OLAS",
@@ -929,7 +1011,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/switchboard.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "SWTCH",
@@ -954,7 +1038,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/openserv.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "SERV",
@@ -979,7 +1065,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/zauthx402.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "ZAUTH",
@@ -1004,7 +1092,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/coral.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "CORAL",
@@ -1029,7 +1119,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/cod3x.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "CDX",
@@ -1054,7 +1146,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/orbofi.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "OBI",
@@ -1079,7 +1173,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/sally.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "A1C",
@@ -1104,7 +1200,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/smol.png",
-      "tags": ["consumer"],
+      "tags": [
+        "consumer"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "SMOL",
@@ -1129,7 +1227,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/mio.png",
-      "tags": ["consumer"],
+      "tags": [
+        "consumer"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "MIO",
@@ -1154,7 +1254,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/santa.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "SANTA",
@@ -1179,7 +1281,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/eliza.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "ELIZA",
@@ -1204,7 +1308,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/regent.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "REGENT",
@@ -1229,7 +1335,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/zara.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "ZARA",
@@ -1254,7 +1362,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/praxis.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "PRXS",
@@ -1279,7 +1389,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/heylol.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "$HEY",
@@ -1304,7 +1416,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/x402jobs.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "JOBS",
@@ -1329,7 +1443,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/agentbank.png",
-      "tags": ["infrastructure"],
+      "tags": [
+        "infrastructure"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "AGENTBANK",
@@ -1354,7 +1470,9 @@
       "medium": null,
       "github": null,
       "logo": "assets/logos/trackgood.png",
-      "tags": ["services"],
+      "tags": [
+        "services"
+      ],
       "facilitator": null,
       "token": {
         "symbol": "TRAI",
@@ -1363,12 +1481,45 @@
         "contract_address": null,
         "coingecko_id": "trackgood-ai"
       }
+    },
+    {
+      "id": "xpay-llc",
+      "name": "X Pay",
+      "description": "x402 v2 USDC facilitator on Base and BNB Chain; merchant API key required.",
+      "website": "https://x-pay.llc/",
+      "docs": "https://facilitator-xpay.llc/docs",
+      "twitter": "x_pay_llc",
+      "telegram": null,
+      "discord": null,
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": null,
+      "github": "xpayllc/xpayllc",
+      "logo": "https://www.api-xpay.com/logo.png",
+      "tags": [
+        "infrastructure"
+      ],
+      "facilitator": {
+        "endpoint": "https://facilitator-xpay.llc",
+        "networks": [
+          "base",
+          "bnb"
+        ],
+        "x402scan": null
+      },
+      "token": null
     }
   ],
   "_meta": {
     "version": "0.4.0",
     "updated": "2026-04-20",
-    "allowed_tags": ["infrastructure", "services", "analytics", "consumer"],
+    "allowed_tags": [
+      "infrastructure",
+      "services",
+      "analytics",
+      "consumer"
+    ],
     "notes": {
       "price_data": "If coingecko_id exists, use CG API. Otherwise use DexScreener with network + contract_address",
       "logos": "200x200 PNG at assets/logos/{id}.png. Fallback to initials if missing.",
@@ -1376,3 +1527,4 @@
     }
   }
 }
+
