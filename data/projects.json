@@ -1363,6 +1363,34 @@
         "contract_address": null,
         "coingecko_id": "trackgood-ai"
       }
+    },
+    {
+      "id": "xpay-llc",
+      "name": "X Pay",
+      "description": "x402 v2 USDC facilitator on Base and BNB Chain; merchant API key required.",
+      "website": "https://x-pay.llc/",
+      "docs": "https://facilitator-xpay.llc/docs",
+      "twitter": "x_pay_llc",
+      "telegram": null,
+      "discord": null,
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": null,
+      "github": "xpayllc/xpayllc",
+      "logo": "https://www.api-xpay.com/logo.png",
+      "tags": [
+        "infrastructure"
+      ],
+      "facilitator": {
+        "endpoint": "https://facilitator-xpay.llc",
+        "networks": [
+          "base",
+          "bnb"
+        ],
+        "x402scan": null
+      },
+      "token": null
     }
   ],
   "_meta": {
@@ -1376,3 +1404,4 @@
     }
   }
 }
+
