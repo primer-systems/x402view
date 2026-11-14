@@ -1363,11 +1363,30 @@
         "contract_address": null,
         "coingecko_id": "trackgood-ai"
       }
+    },
+    {
+      "id": "revenue-dojo",
+      "name": "Revenue Dojo",
+      "description": "Live x402 agent-payment verifier and paid API on Base",
+      "website": "https://x402.167-172-95-184.nip.io",
+      "docs": "https://x402.167-172-95-184.nip.io/quickstart",
+      "twitter": null,
+      "telegram": null,
+      "discord": null,
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": null,
+      "github": "AmitabhainArunachala/revenue-swarm-x402",
+      "logo": null,
+      "tags": ["services", "infrastructure"],
+      "facilitator": null,
+      "token": null
     }
   ],
   "_meta": {
     "version": "0.4.0",
-    "updated": "2026-04-20",
+    "updated": "2026-07-05",
     "allowed_tags": ["infrastructure", "services", "analytics", "consumer"],
     "notes": {
       "price_data": "If coingecko_id exists, use CG API. Otherwise use DexScreener with network + contract_address",
