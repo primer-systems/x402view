@@ -1363,6 +1363,27 @@
         "contract_address": null,
         "coingecko_id": "trackgood-ai"
       }
+    },
+    {
+      "id": "x402-ping",
+      "name": "x402-ping",
+      "description": "Palm Beach Pete agent discovery ping \u2014 Base USDC /premium 402 @0.05",
+      "website": "https://x402-ping.palmbeachpete.workers.dev",
+      "docs": "https://github.com/filip-study/x402-ping",
+      "twitter": null,
+      "telegram": null,
+      "discord": null,
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": null,
+      "github": "filip-study/x402-ping",
+      "logo": null,
+      "tags": [
+        "services"
+      ],
+      "facilitator": null,
+      "token": null
     }
   ],
   "_meta": {
