@@ -1363,6 +1363,25 @@
         "contract_address": null,
         "coingecko_id": "trackgood-ai"
       }
+    },
+    {
+      "id": "cian-endpoint-audit",
+      "name": "Cian Endpoint Audit",
+      "description": "Paid HTTP/TLS endpoint audit over x402 on Base, $0.01 per call",
+      "website": "https://cian-x402.netlify.app/",
+      "docs": "https://github.com/cian-spider/cian-endpoint-audit",
+      "twitter": null,
+      "telegram": null,
+      "discord": null,
+      "farcaster": null,
+      "youtube": null,
+      "reddit": null,
+      "medium": null,
+      "github": "cian-spider/cian-endpoint-audit",
+      "logo": null,
+      "tags": ["services"],
+      "facilitator": null,
+      "token": null
     }
   ],
   "_meta": {
